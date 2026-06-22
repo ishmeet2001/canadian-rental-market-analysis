@@ -1,172 +1,58 @@
-# Canadian Rental Market Pressure Dashboard
+# Canadian Rental Market Pressure Analysis
 
-## Overview
-
-A data-driven dashboard identifying which Canadian rental markets are under the most pressure based on rent levels, vacancy rates, and supply constraints.
-
-**Target Users:**
-- Renters seeking market-aware decision-making
-- Housing-policy analysts monitoring affordability trends
-- Municipal planners assessing local rental-market health
-
-**Key Business Question:** Which major Canadian rental markets show the strongest signs of rental-market pressure in 2025, and how does that pressure differ by unit size?
+I used CMHC rental-market data to compare average rents, vacancy rates, and recent changes across Canadian cities. The goal was to see which markets show multiple signs of rental pressure at the same time, helping policy analysts and planners identify cities that need closer monitoring.
 
 ---
 
-## Core Metrics
+## The Core Concept
+This analysis uses average **two-bedroom rent** as a standardized benchmark to compare cities. It does not represent all renters or all unit sizes, but it provides a consistent metric across geographies. 
 
-1. **Standardized Two-Bedroom Average Rent (`average_rent_2br`)** – The average rent for two-bedroom units. This serves as the default standardized comparison measure across markets, rather than a representation of all renters. We do not call this or any other measure "overall average rent" as no weighted overall rent is provided.
-2. **Vacancy Rate** – Percentage of vacant rental units.
-3. **Turnover Rate** – Percentage of units that changed tenants during the year.
-4. **Rent Growth (YoY)** – Annual change in two-bedroom rent.
-5. **Vacancy Change (YoY)** – Annual change in vacancy rate (percentage points).
+Since this project only looks at supply and demand indicators (and does not include household income data), this is a **market pressure screening tool** rather than an affordability score.
 
 ---
 
-## Data Sources
-
-### Primary Sources
-
-| Source | Table/Survey | Coverage | Key Variables | Notes |
-|--------|-------------|----------|----------------|-------|
-| **Statistics Canada** | 34-10-0133-01 | 1990–2025 (varies) | Average rent by geography | Historical breadth; check for suppressed values |
-| **CMHC** | Rental Market Survey | Annual (varies by centre) | Vacancy rate, avg rent, units | Covers major centres; most reliable for recent years |
-
-### Data Integration Strategy
-
-1. **Start with Statistics Canada 34-10-0133-01** for historical average rent trends
-2. **Supplement with CMHC RMS** for vacancy rates and rental-unit counts
-3. **Align geographies** (province, CMA, major centres) across both sources
-4. **Handle missing/suppressed data** with clear documentation
+## How It Works & Tools Used
+1. **Clean & Load (Python):** In `01_clean_and_prepare.ipynb`, I ingest raw CMHC table data, clean up suppressed values, filter out provincial aggregates, and load the clean data into a local SQLite database (`database/rental_market.db`).
+2. **SQL Analysis (SQLite):** In `02_sql_analysis.ipynb` and `sql/rental_market_queries.sql`, I calculate data-driven benchmarks using SQLite window functions:
+   * **High Rent:** >= $1,802 (75th percentile)
+   * **Low Vacancy:** <= 2.5% (25th percentile)
+   * **Rapid Rent Growth:** >= 6.1% YoY (75th percentile)
+   * **Vacancy Tightening:** vacancy change is negative (< 0 pp) and <= 0.1 pp
+3. **Scoring & Labeling:** Cities are scored from 0 to 4 based on how many thresholds they cross. Caution-quality records (estimate flag 'd') are kept in the final segment outputs but were excluded when calculating thresholds to keep the benchmarks reliable.
 
 ---
 
-## Analysis Questions
+## Key Findings
 
-1. Which Canadian rental markets have the highest average rents?
-2. Which markets have the lowest vacancy rates?
-3. Which cities combine **high rent + low vacancy**?
-4. Which markets have seen the fastest rent growth?
-5. Which cities moved from lower pressure to higher pressure over time?
-6. Which markets should be flagged for ongoing monitoring?
+### Top Markets Under Pressure (2025)
+* **Nanaimo, St. John's, and Saguenay (Score 3):** Show the highest level of pressure across rent levels, vacancy tightness, and year-over-year changes.
+* **Halifax, Kingston, Kamloops, Sudbury, Saint John, and Québec (Score 2):** Show moderate to high pressure, driven mainly by low vacancy rates and tightening supply.
 
----
-
-## Pressure Categories (V1)
-
-Simple, explainable segmentation:
-
-- **High Pressure:** High rent + low vacancy
-- **Growth Pressure:** Rapid rent growth (YoY)
-- **Supply Pressure:** Low vacancy + limited unit growth
-- **Monitor:** Emerging trends or data gaps
-- **Lower Pressure:** Stable or declining rent; adequate vacancy
-
-*Note:* Not an "affordability score"—does not incorporate income data. Focus is on market indicators only.
+### Proposed Policy Actions
+Based on these findings, I outline four actionable planning recommendations to address these pressure points:
+* **Densification:** Accelerate zoning changes and low-rise densification in land-constrained areas like Vancouver.
+* **Faster Permitting:** Streamline development approvals to reduce bureaucratic delays and build homes quicker.
+* **Migration Incentives:** Use tax breaks and infrastructure to support population growth in rural and suburban areas.
+* **Demand Controls:** Keep speculation taxes and limits on short-term rentals to protect long-term housing availability.
 
 ---
 
-## Project Structure
+## Project Directory
 
 ```
-canadian-rental-market-pressure/
 ├── data/
-│   ├── raw/                 # Original downloads from Stats Can, CMHC
-│   └── processed/           # Cleaned, deduplicated, aligned CSVs
-├── database/                # SQLite or local DB exports
+│   ├── raw/                       # Original CMHC and StatsCan data files
+│   └── processed/                 # Cleaned dataset (CSV)
+├── database/
+│   └── rental_market.db           # SQLite database
 ├── notebooks/
-│   ├── 01_data_cleaning.ipynb       # Ingest, deduplicate, align geographies
-│   ├── 02_sql_market_pressure_analysis.ipynb  # Join sources, compute metrics
-│   ├── 03_eda_visualizations.ipynb  # Exploratory charts
-│   └── 04_powerbi_export.ipynb      # Export to Power BI format
-├── outputs/
-│   ├── charts/              # PNG/SVG dashboard exports
-│   └── tables/              # CSV tables for Power BI
-├── sql/                     # SQL queries for market-pressure logic
-├── requirements.txt         # Python dependencies
-└── README.md               # This file
+│   ├── 01_clean_and_prepare.ipynb # Data cleaning and DB loading
+│   └── 02_sql_analysis.ipynb      # SQL queries and summaries
+├── sql/
+│   └── rental_market_queries.sql  # Standalone SQL queries
+└── outputs/
+    └── tables/
+        ├── rental_market_thresholds.csv      # Calculated cutoffs
+        ├── rental_market_segments.csv        # Final scored cities
+        └── rental_market_quality_review.csv  # Data quality logs
 ```
-
----
-
-## Notebooks (Quick Overview)
-
-### **01_data_cleaning.ipynb**
-- Download or import Stats Can Table 34-10-0133-01 (CSV)
-- Download or import CMHC RMS data (CSV or API)
-- Standardize geography names (province, CMA, centre)
-- Handle missing values and suppressed cells
-- Export cleaned datasets to `data/processed/`
-
-### **02_sql_market_pressure_analysis.ipynb**
-- Load cleaned datasets into SQLite
-- Join average rent (Stats Can) with vacancy & units (CMHC)
-- Compute:
-  - Rent growth (YoY %)
-  - Vacancy change (YoY pp)
-  - Pressure categories
-- Export market-pressure dataset
-
-### **03_eda_visualizations.ipynb**
-- Exploratory scatter plots: rent vs. vacancy
-- Time-series: rent growth by city
-- Heatmaps: pressure category distribution
-- Identify outliers and trends
-
-### **04_powerbi_export.ipynb**
-- Export final tables to CSV/JSON for Power BI
-- Format for dashboard consumption
-- Prepare summary metrics by pressure category
-
----
-
-## Quick Start
-
-### 1. Environment Setup
-```bash
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-### 2. Data Preparation
-- Manually download Statistics Canada Table 34-10-0133-01 from https://www150.statcan.gc.ca/
-- Manually download CMHC Rental Market Survey data from https://www.cmhc-schl.gc.ca/
-- Place files in `data/raw/`
-
-### 3. Run Notebooks
-```
-01_data_cleaning → 02_sql_market_pressure_analysis → 03_eda_visualizations → 04_powerbi_export
-```
-
----
-
-## Key Design Decisions
-
-- **Standardized Rent Measure:** Use two-bedroom rent (`average_rent_2br`) as the default standardized comparison measure. It represents a standardized benchmark, not the rent of all unit sizes or a weighted average of all renters. No measure is referred to as "overall average rent" unless a weighted overall measure is explicitly provided.
-- **Extensible Database Schema:** The SQLite database is designed to allow a bedroom-type detail table (`bedroom_rent_2024_2025`) to be added in Phase 2 without altering the primary city-level table (`rental_market_2024_2025`).
-- **No affordability assumptions:** Metrics are demand/supply indicators only.
-- **Pressure categories:** Simple, groupings for stakeholder communication.
-- **SQLite:** Lightweight local database for reproducibility.
-
----
-
-## Version 1 Scope
-
-✓ Ingest and clean CMHC Table 1.0 for core city-level pressure indicators  
-✓ Model primary fact table using `average_rent_2br` as the standardized rent benchmark  
-✓ Verify feasibility of bedroom-type expansion via Table 6.0 analysis  
-
-✗ Merging Table 6.0 into the main fact table (deferred to Phase 2)  
-✗ Bedroom Type Power BI Slicer (unsafe for Version 1 due to lack of vacancy rate breakdown and overall average rent by bedroom type)  
-✗ Predictive modelling  
-✗ Affordability scoring (requires income)  
-
----
-
-## Next Steps
-
-1. Confirm downloadable data availability from Statistics Canada and CMHC
-2. Map geography codes and names across sources
-3. Execute Notebook 01 (cleaning)
-4. Iterate on pressure categories based on data distribution
