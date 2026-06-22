@@ -8,7 +8,7 @@
 -- Business Question: Which major Canadian rental markets have the highest
 -- rents in 2025, and what are their corresponding vacancy and turnover rates?
 -- --------------------------------------------------------------------
--- EXPORT: outputs/tables/rental_market_rankings.csv
+-- (Displayed in overview section; not exported in V1)
 SELECT 
     centre,
     vacancy_rate_2025,
@@ -93,7 +93,7 @@ SELECT
 -- pressure in 2025 based on thresholds for high rent, low vacancy, rapid rent
 -- growth, and vacancy tightening?
 -- --------------------------------------------------------------------
--- EXPORT: outputs/tables/rental_market_pressure_segments.csv
+-- EXPORT: outputs/tables/rental_market_segments.csv
 WITH 
 thresholds AS (
     WITH 
@@ -217,7 +217,6 @@ ORDER BY market_pressure_score DESC, average_rent_2br_2025 DESC, vacancy_rate_20
 -- Business Question: How did rent and vacancy conditions change between 2024
 -- and 2025 across centres?
 -- --------------------------------------------------------------------
--- EXPORT: outputs/tables/rental_market_change_summary.csv
 SELECT 
     centre,
     average_rent_2br_2024,
