@@ -1,58 +1,74 @@
 # Canadian Rental Market Pressure Analysis
 
-I used CMHC rental-market data to compare average rents, vacancy rates, and recent changes across Canadian cities. The goal was to see which markets show multiple signs of rental pressure at the same time, helping policy analysts and planners identify cities that need closer monitoring.
+I used CMHC rental-market data to compare rent, vacancy, and recent market changes across major Canadian centres. The goal was to identify cities showing multiple rental-market pressure signals at the same time.
 
 ---
 
-## The Core Concept
-This analysis uses average **two-bedroom rent** as a standardized benchmark to compare cities. It does not represent all renters or all unit sizes, but it provides a consistent metric across geographies. 
+## What I Found
 
-Since this project only looks at supply and demand indicators (and does not include household income data), this is a **market pressure screening tool** rather than an affordability score.
+The analysis highlights markets with different pressure patterns rather than declaring one city “worst.”
 
----
+* **Nanaimo** showed high 2025 two-bedroom rent, low vacancy, and a decline in vacancy from 2024.
+* **St. John’s** and **Saguenay** combined low vacancy, faster rent growth, and lower vacancy than the prior year.
+* **Halifax** crossed the high-rent and rapid-growth thresholds.
+* **Vancouver, Toronto, Victoria, and Calgary** had high two-bedroom rents, but did not show the same combination of tightening vacancy and rapid growth in this one-year comparison.
 
-## How It Works & Tools Used
-1. **Clean & Load (Python):** In `01_clean_and_prepare.ipynb`, I ingest raw CMHC table data, clean up suppressed values, filter out provincial aggregates, and load the clean data into a local SQLite database (`database/rental_market.db`).
-2. **SQL Analysis (SQLite):** In `02_sql_analysis.ipynb` and `sql/rental_market_queries.sql`, I calculate data-driven benchmarks using SQLite window functions:
-   * **High Rent:** >= $1,802 (75th percentile)
-   * **Low Vacancy:** <= 2.5% (25th percentile)
-   * **Rapid Rent Growth:** >= 6.1% YoY (75th percentile)
-   * **Vacancy Tightening:** vacancy change is negative (< 0 pp) and <= 0.1 pp
-3. **Scoring & Labeling:** Cities are scored from 0 to 4 based on how many thresholds they cross. Caution-quality records (estimate flag 'd') are kept in the final segment outputs but were excluded when calculating thresholds to keep the benchmarks reliable.
+These results are intended for market monitoring. They do not explain why rents or vacancies changed.
 
 ---
 
-## Key Findings
+## Method
 
-### Top Markets Under Pressure (2025)
-* **Nanaimo, St. John's, and Saguenay (Score 3):** Show the highest level of pressure across rent levels, vacancy tightness, and year-over-year changes.
-* **Halifax, Kingston, Kamloops, Sudbury, Saint John, and Québec (Score 2):** Show moderate to high pressure, driven mainly by low vacancy rates and tightening supply.
-
-### Proposed Policy Actions
-Based on these findings, I outline four actionable planning recommendations to address these pressure points:
-* **Densification:** Accelerate zoning changes and low-rise densification in land-constrained areas like Vancouver.
-* **Faster Permitting:** Streamline development approvals to reduce bureaucratic delays and build homes quicker.
-* **Migration Incentives:** Use tax breaks and infrastructure to support population growth in rural and suburban areas.
-* **Demand Controls:** Keep speculation taxes and limits on short-term rentals to protect long-term housing availability.
+* Cleaned CMHC Rental Market Survey Table 1.0 data for major centres.
+* Used 2025 rent, vacancy, rent growth, and vacancy change indicators.
+* Created data-driven thresholds using SQLite window functions.
+* Assigned transparent market-pressure labels using SQL CASE statements.
+* Preserved data-quality flags and excluded caution-quality records from threshold calculations.
 
 ---
 
-## Project Directory
+## Data-Driven Thresholds (2025)
+
+The analysis identifies pressure points by comparing cities against four benchmarks (calculated using the 75th percentile for rents and growth, and the 25th percentile for vacancy and change):
+
+* **High Rent:** >= $1,802
+* **Low Vacancy:** <= 2.5%
+* **Rapid Rent Growth:** >= 6.1%
+* **Vacancy tightening:** the vacancy rate decreased from 2024 to 2025.
+
+---
+
+## Data Limitations
+
+* This version compares 2024 and 2025 only.
+* Two-bedroom rent is used as a consistent comparison measure; it does not represent every household or unit size.
+* The analysis does not include household income, so it is not an affordability score.
+* Some CMHC estimates have caution-quality flags and are not used to calculate thresholds.
+* The project identifies patterns, not causes or policy outcomes.
+
+---
+
+## Tools
+
+Python, pandas, SQLite, SQL, Jupyter Notebook, and Power BI.
+
+---
+
+## Repository Structure
 
 ```
-├── data/
-│   ├── raw/                       # Original CMHC and StatsCan data files
-│   └── processed/                 # Cleaned dataset (CSV)
-├── database/
-│   └── rental_market.db           # SQLite database
-├── notebooks/
-│   ├── 01_clean_and_prepare.ipynb # Data cleaning and DB loading
-│   └── 02_sql_analysis.ipynb      # SQL queries and summaries
-├── sql/
-│   └── rental_market_queries.sql  # Standalone SQL queries
-└── outputs/
-    └── tables/
-        ├── rental_market_thresholds.csv      # Calculated cutoffs
-        ├── rental_market_segments.csv        # Final scored cities
-        └── rental_market_quality_review.csv  # Data quality logs
+notebooks/     Data cleaning and SQL analysis
+sql/           SQL queries used for analysis
+data/          Raw and processed datasets
+outputs/       Dashboard-ready tables and charts
+database/      SQLite database
 ```
+
+---
+
+## Data Source
+
+* [CMHC Rental Market Survey Data Tables](https://www.cmhc-schl.gc.ca/)
+* [Statistics Canada Table 34-10-0133-01](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3410013301)
+* [CMHC Licence Agreement for the Use of Data](https://www.cmhc-schl.gc.ca/about-us/terms-conditions/hmip-terms-conditions)
+* [CMHC Rental Market Survey Methodology](https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-research/surveys/methods/methodology-rental-market-survey)

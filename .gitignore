@@ -1,6 +1,6 @@
-.DS_Store
 __pycache__/
 .ipynb_checkpoints/
 .venv/
-venv/
-*.pyc
+.env
+.DS_Store
+*.db-journal
