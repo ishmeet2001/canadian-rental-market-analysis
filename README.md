@@ -38,16 +38,6 @@ The analysis identifies pressure points by comparing cities against four benchma
 
 ---
 
-## Data Limitations
-
-* This version compares 2024 and 2025 only.
-* Two-bedroom rent is used as a consistent comparison measure; it does not represent every household or unit size.
-* The analysis does not include household income, so it is not an affordability score.
-* Some CMHC estimates have caution-quality flags and are not used to calculate thresholds.
-* The project identifies patterns, not causes or policy outcomes.
-
----
-
 ## Tools
 
 Python, pandas, SQLite, SQL, Jupyter Notebook, and Power BI.
