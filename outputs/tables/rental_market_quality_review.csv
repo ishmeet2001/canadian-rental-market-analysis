@@ -1,0 +1,15 @@
+centre,quality_review_reason,is_caution_quality,has_valid_rent_2025,has_valid_vacancy_2025,has_valid_rent_growth,vacancy_quality_2025,rent_quality_2025,rent_growth_quality_2025
+Charlottetown CA,Caution quality (flag d),1,1,1,1,c,a,d
+Drummondville CMA,Missing rent growth,0,1,1,0,c,b,
+Ottawa-Gatineau CMA (Qué. part),Caution quality (flag d),1,1,1,1,c,a,d
+Belleville - Quinte West CMA,Missing rent growth,0,1,1,0,c,a,
+Brantford CMA,Missing rent growth,0,1,1,0,c,a,
+Oshawa CMA,Missing rent growth,0,1,1,0,b,a,
+Peterborough CMA,Missing rent growth,0,1,1,0,b,a,
+Greater Sudbury/Grand Sudbury CMA,Missing rent growth,0,1,1,0,a,a,
+Windsor CMA,Caution quality (flag d),1,1,1,1,b,a,d
+Calgary CMA,Missing rent growth,0,1,1,0,a,a,
+Lethbridge CMA,Caution quality (flag d),1,1,1,1,d,a,c
+Abbotsford-Mission CMA,Caution quality (flag d),1,1,1,1,a,a,d
+Chilliwack CMA,Missing rent growth,0,1,1,0,b,a,
+Kamloops CMA,Missing rent growth,0,1,1,0,a,a,

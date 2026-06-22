@@ -1,0 +1,44 @@
+centre,vacancy_rate_2025,turnover_rate_2025,average_rent_2br_2025,rent_growth_pct_2024_2025,vacancy_change_pct_points,is_caution_quality
+Vancouver CMA,3.7,11.6,2363.0,2.2,2.1,0
+Victoria CMA,3.3,18.8,2120.0,5.1,0.7,0
+Kelowna CMA,6.4,29.6,2118.0,2.4,2.6,0
+Toronto CMA,3.0,8.7,2046.0,3.4,0.5,0
+Ottawa-Gatineau CMA (Ont. part),3.0,15.4,1926.0,3.4,0.4,0
+Calgary CMA,5.0,24.9,1914.0,,0.2,0
+Nanaimo CMA,2.2,23.6,1910.0,3.5,-0.7,0
+Kitchener-Cambridge-Waterloo CMA,4.1,16.1,1832.0,3.3,0.5,0
+Halifax CMA,2.7,9.0,1826.0,6.7,0.6,0
+Guelph CMA,3.1,15.1,1802.0,4.6,1.2,0
+Kingston CMA,2.4,17.3,1764.0,2.4,-0.5,0
+Barrie CMA,4.3,12.8,1755.0,4.3,0.9,0
+Oshawa CMA,3.7,4.8,1754.0,,0.1,0
+Lethbridge CMA,4.5,46.3,1706.0,6.7,4.0,1
+Kamloops CMA,1.2,17.6,1679.0,,-0.2,0
+Hamilton CMA,3.6,13.1,1656.0,1.6,1.2,0
+London CMA,4.0,15.1,1651.0,4.1,1.1,0
+Brantford CMA,3.5,14.5,1619.0,,1.2,0
+Edmonton CMA,3.8,28.8,1603.0,3.5,0.7,0
+Abbotsford-Mission CMA,2.8,9.7,1592.0,5.3,1.7,1
+Winnipeg CMA,2.8,22.2,1571.0,1.9,1.1,0
+Greater Sudbury/Grand Sudbury CMA,1.2,6.6,1558.0,,-0.3,0
+Saskatoon CMA,3.3,19.3,1548.0,5.2,1.3,0
+St. Catharines-Niagara CMA,3.9,12.8,1527.0,5.5,0.1,0
+Chilliwack CMA,3.0,10.1,1526.0,,1.7,0
+Peterborough CMA,3.1,8.4,1518.0,,-0.2,0
+Thunder Bay CMA,4.0,3.4,1495.0,6.8,0.8,0
+Belleville - Quinte West CMA,3.4,16.9,1484.0,,-0.1,0
+Regina CMA,2.7,27.6,1473.0,4.2,0.1,0
+Ottawa-Gatineau CMA (Qué. part),3.8,16.2,1460.0,4.7,1.9,1
+Windsor CMA,3.7,12.2,1454.0,3.6,0.4,1
+Moncton CMA,3.9,15.4,1453.0,4.7,2.4,0
+Red Deer CMA,3.5,20.5,1414.0,5.8,2.0,0
+Fredericton CMA,2.5,13.1,1413.0,5.2,1.6,0
+St. John's CMA,2.0,13.0,1361.0,7.6,-0.1,0
+Montréal CMA,2.9,9.4,1346.0,7.2,0.8,0
+Charlottetown CA,1.6,9.8,1300.0,4.7,0.9,1
+Saint John CMA,1.9,11.8,1290.0,5.8,-2.1,0
+Québec CMA,2.4,13.0,1277.0,6.1,1.5,0
+Sherbrooke CMA,2.7,12.0,1062.0,9.8,1.3,0
+Drummondville CMA,1.8,10.9,1045.0,,0.3,0
+Trois-Rivières CMA,2.7,10.1,1016.0,6.6,1.8,0
+Saguenay CMA,1.3,12.6,985.0,10.9,-0.3,0
