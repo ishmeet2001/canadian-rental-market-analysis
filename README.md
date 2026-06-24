@@ -40,7 +40,7 @@ The analysis identifies rental-market signals using transparent benchmarks. High
 
 ## Tools
 
-Python, pandas, SQLite, SQL, Jupyter Notebook, and Power BI.
+Python, SQL and Power BI
 
 ---
 
@@ -58,14 +58,6 @@ Note: The interactive Power BI report was developed in an SFU-managed workspace,
 
 ---
 
-## Project Brief Slide Deck
-
-View or download the presentation assets:
-* **[PDF Presentation Slide Deck](outputs/canadian_rental_market_deck.pdf)** — Printable landscape presentation slide deck.
-* **[Slide Outline (Markdown)](outputs/project_brief_deck.md)** — Slide-by-slide text outline of the presentation.
-
----
-
 ## Repository Structure
 
 ```
@@ -75,6 +67,8 @@ data/          Raw and processed datasets
 outputs/       Dashboard-ready tables and charts
 database/      SQLite database
 ```
+---
+* **[Project Brief](outputs/canadian_rental_market_deck.pdf)** 
 
 ---
 
