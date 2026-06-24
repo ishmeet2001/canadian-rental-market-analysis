@@ -6,17 +6,17 @@
 ### Slide 1 — Title
 
 # Canadian Rental Market Pressure Analysis
-### Python + SQL + CMHC Rental Market Data
-**2024–2025 comparison across 43 major centres**
+### Comparing cost, availability, and recent change across 43 Canadian rental markets
+**Where multiple rental-market pressure signals appear together**
 
-*A study on how combined market signals highlight rental pressure across Canada.*
+*Python + SQL + CMHC Rental Market Data (2024-2025)*
 
 ---
 
 ### Slide 2 — Problem
 
 ## Question:
-### Which Canadian rental markets showed the strongest pressure signals in 2025?
+### Which Canadian rental markets showed combinations of high rent, low vacancy, rapid rent growth, or declining vacancy between 2024 and 2025?
 
 We monitor pressure using 4 key signals:
 
@@ -31,7 +31,7 @@ We monitor pressure using 4 key signals:
 └───────────────────────────┘     └───────────────────────────┘
 ```
 
-*Note: High rent alone does not mean highest pressure. The strongest pressure comes from combined signals.*
+*Note: A higher score does not necessarily mean higher rent; it means more selected signals occurred at the same time.*
 
 ---
 
@@ -48,32 +48,49 @@ We monitor pressure using 4 key signals:
 
 ---
 
-### Slide 4 — Main Finding
+### Slide 4 — Markets with Combined Pressure Signals
 
-## Top 10 Pressure-Signal Markets
+## Markets with the most combined pressure signals
+### A higher score does not necessarily mean higher rent; it means more selected signals occurred at the same time.
 
-![Top 10 Pressure-Signal Markets](/Users/ishmeet16/Documents/RMA/canadian-rental-market-pressure/outputs/charts/top_pressure_markets.png)
+![Markets with Multiple Pressure Signals](/Users/ishmeet16/Documents/RMA/canadian-rental-market-pressure/outputs/charts/top_pressure_markets.png)
 
 **Caption:**
-*Nanaimo, St. John’s, and Saguenay had the most combined pressure signals (Score 3), but for different reasons.*
+*Nanaimo, St. John’s, and Saguenay led with 3 signals, while Halifax, Kingston, Kamloops, Sudbury, Saint John, and Quebec hit exactly 2 signals.*
 
 ---
 
-### Slide 5 — Explain the Difference
+### Slide 5 — Highest 2025 Rents (Cost Story)
+
+## Highest 2025 Two-Bedroom Rents
+### Looking at absolute costs across the top major markets.
+
+![Highest 2025 Two-Bedroom Rents](/Users/ishmeet16/Documents/RMA/canadian-rental-market-pressure/outputs/charts/highest_rents.png)
+
+**Caption:**
+*Vancouver, Victoria, Kelowna, and Toronto had the highest two-bedroom rents, with Vancouver leading at $2,363.*
+
+---
+
+### Slide 6 — Explain the Difference (Scatterplot)
 
 ## Rent vs Vacancy Scatterplot
 
 ![Rent vs Vacancy Scatterplot](/Users/ishmeet16/Documents/RMA/canadian-rental-market-pressure/outputs/charts/rent_vs_vacancy_scatterplot.png)
 
 **Key Message:**
-*Vancouver had the highest rent, but Nanaimo had both high rent and low vacancy. Saguenay had lower rent but very tight vacancy and fast growth.*
+*Vancouver had the highest rent, but Nanaimo had both high rent and low vacancy. Saguenay had lower rent but very tight vacancy and fast growth. This visualizes the separation of the cost story and the tightening story.*
 
 ---
 
-### Slide 6 — Answer + Limits
+### Slide 7 — Answer + Limits
 
 ## The Answer:
-Rental pressure looked different across cities. Some markets were expensive, some were tight, and some were changing quickly. **Nanaimo, St. John’s, Saguenay, and Halifax** were the strongest markets to monitor based on combined signals.
+The analysis separates two patterns: high-cost markets and markets with rapidly tightening rental conditions. Markets with multiple signals may warrant closer monitoring, but the score does not measure affordability or identify causes.
+
+* **High Cost:** Vancouver and Toronto had the highest two-bedroom rents in the dataset.
+* **High Combined Pressure:** Nanaimo combined high rent with low and declining vacancy.
+* **Emerging Pressure:** St. John’s and Saguenay were not among the highest-rent markets, but their low vacancy and rapid growth signals suggest emerging rental-market pressure.
 
 ### Limitations:
 * **2024–2025 comparison only** (short-term window).

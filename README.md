@@ -11,7 +11,7 @@ The analysis highlights markets with different pressure patterns rather than dec
 * **Nanaimo** showed high 2025 two-bedroom rent, low vacancy, and a decline in vacancy from 2024.
 * **St. John’s** and **Saguenay** combined low vacancy, faster rent growth, and lower vacancy than the prior year.
 * **Halifax** crossed the high-rent and rapid-growth thresholds.
-* **Vancouver, Toronto, Victoria, and Calgary** had high two-bedroom rents, but did not show the same combination of tightening vacancy and rapid growth in this one-year comparison.
+* **Vancouver, Toronto, Victoria, and Calgary** had high two-bedroom rents, but did not show the same combination of tightening vacancy and rapid growth in this 2024–2025 comparison.
 
 These results are intended for market monitoring. They do not explain why rents or vacancies changed.
 
@@ -29,18 +29,40 @@ These results are intended for market monitoring. They do not explain why rents 
 
 ## Data-Driven Thresholds (2025)
 
-The analysis identifies pressure points by comparing cities against four benchmarks (calculated using the 75th percentile for rents and growth, and the 25th percentile for vacancy and change):
+The analysis identifies rental-market signals using transparent benchmarks. High rent and rapid rent growth thresholds were calculated from the distribution of included markets. Low vacancy reflects limited availability, while vacancy tightening indicates that the vacancy rate decreased from 2024 to 2025.
 
-* **High Rent:** >= $1,802
-* **Low Vacancy:** <= 2.5%
-* **Rapid Rent Growth:** >= 6.1%
-* **Vacancy tightening:** the vacancy rate decreased from 2024 to 2025.
+* High Rent: >= $1,802
+* Low Vacancy: <= 2.5%
+* Rapid Rent Growth: >= 6.1%
+* Vacancy Tightening: Vacancy rate decreased from 2024 to 2025
 
 ---
 
 ## Tools
 
 Python, pandas, SQLite, SQL, Jupyter Notebook, and Power BI.
+
+---
+
+## Power BI Dashboard
+
+The project includes a two-page Power BI report:
+
+* Overview: compares high-cost rental markets with markets showing multiple rental-pressure signals.
+* Pressure Details: shows the rent, vacancy, rent-growth, and vacancy-change conditions behind each flagged market.
+
+Note: The interactive Power BI report was developed in an SFU-managed workspace, where public web publishing is restricted. Dashboard screenshots and an [exported PDF](outputs/canadian_rental_market_deck.pdf) are included in this repository so the report can be reviewed without organizational access.
+
+![Overview dashboard](images/overview.png)
+![Pressure details dashboard](images/pressure-details.png)
+
+---
+
+## Project Brief Slide Deck
+
+View or download the presentation assets:
+* **[PDF Presentation Slide Deck](outputs/canadian_rental_market_deck.pdf)** — Printable landscape presentation slide deck.
+* **[Slide Outline (Markdown)](outputs/project_brief_deck.md)** — Slide-by-slide text outline of the presentation.
 
 ---
 
